@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "http://localhost:5000/api/posts";
+const url = "https://threads-clone-hd.onrender.com/api/posts";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
@@ -38,7 +38,7 @@ export const getUserPosts = createAsyncThunk(
   "post/getPosts",
   async (username, thunkAPI) => {
     try {
-      const { data } = await axios.get(`/api/posts/user/${username}`);
+      const { data } = await axios.get(`${url}/user/${username}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -50,7 +50,7 @@ export const deletePost = createAsyncThunk(
   "post/delete",
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`/api/posts/${id}`, config);
+      await axios.delete(`${url}/${id}`, config);
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -63,7 +63,7 @@ export const replyToPost = createAsyncThunk(
   async ({ reply, id }, thunkAPI) => {
     try {
       const { data } = await axios.patch(
-        `/api/posts/reply/${id}`,
+        `${url}/reply/${id}`,
         { text: reply },
         config
       );
@@ -78,7 +78,7 @@ export const likeAndUnlike = createAsyncThunk(
   "post/like",
   async (id, thunkAPI) => {
     try {
-      const { data } = await axios.patch(`/api/posts/like/${id}`, {}, config);
+      const { data } = await axios.patch(`${url}/like/${id}`, {}, config);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);
@@ -90,7 +90,7 @@ export const getFeedPosts = createAsyncThunk(
   "posts/getFeedPosts",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get("/api/posts/feed", config);
+      const { data } = await axios.get(`${url}/feed`, config);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data.message);

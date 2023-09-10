@@ -85,7 +85,10 @@ const Header = () => {
           </Flex>
         </Flex>
       ) : (
-        <Flex justifyContent={"center"} gap={5} mt={6} mb={12}>
+        <Flex alignItems={"center"} justifyContent={"center"} gap={5} mt={6} mb={12}>
+          {!window.location.href.includes("/auth") && (
+            <SearchIcon cursor={"pointer"} onClick={onOpen} />
+          )}
           <Image
             cursor={"pointer"}
             alt="logo"

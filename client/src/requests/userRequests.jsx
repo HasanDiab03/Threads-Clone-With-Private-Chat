@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "http://localhost:5000/api/users";
+const url = "https://threads-clone-hd.onrender.com/api/users";
 const token = JSON.parse(localStorage.getItem("token"));
 
 const config = {
@@ -63,7 +63,7 @@ export const updateProfile = createAsyncThunk(
 
 export const followUnfollow = async (userId, toast) => {
   try {
-    await axios.patch(`/api/users/follow/${userId}`, {}, config);
+    await axios.patch(`${url}/follow/${userId}`, {}, config);
     return true;
   } catch (error) {
     toast("Error", error.response.data.message, "error");
@@ -72,7 +72,7 @@ export const followUnfollow = async (userId, toast) => {
 
 export const getSearchedUsers = async (search, toast) => {
   try {
-    const { data } = await axios.get(`/api/users/search?search=${search}`);
+    const { data } = await axios.get(`${url}/search?search=${search}`);
     return data;
   } catch (error) {
     toast("Error", error.response.data.message);

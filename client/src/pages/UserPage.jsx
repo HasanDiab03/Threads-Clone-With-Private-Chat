@@ -21,7 +21,9 @@ const UserPage = () => {
 
   const getUser = async () => {
     try {
-      const { data } = await axios.get(`/api/users/profile/${username}`);
+      const { data } = await axios.get(
+        `https://threads-clone-hd.onrender.com/api/users/profile/${username}`
+      );
       setLoading(false);
       setUser(data);
     } catch (error) {
