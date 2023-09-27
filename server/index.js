@@ -24,7 +24,7 @@ app.use("/api/messages", messageRoutes);
 
 const port = process.env.PORT || 5000;
 
-const __dirname = path.dirname(path.resolve());
+const __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/dist")));
   app.get("*", (req, res) => {
