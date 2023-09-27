@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "/api/messages";
+const url = "https://threads-dv7o.onrender.com/api/messages";
 const token = JSON.parse(localStorage.getItem("token"));
 
 const config = {
@@ -49,7 +49,7 @@ export const sendMessage = createAsyncThunk(
 export const searchConversation = async (username, toast) => {
   try {
     const { data } = await axios.get(
-      `/api/users/profile/${username}`,
+      `https://threads-dv7o.onrender.com/api/users/profile/${username}`,
       config
     );
     return data;

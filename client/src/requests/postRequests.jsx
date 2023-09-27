@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 // const url = "https://threads-clone-hd.onrender.com/api/posts";
-const url = "/api/posts";
+const url = "https://threads-dv7o.onrender.com/api/posts";
 
 const token = JSON.parse(localStorage.getItem("token"));
 
