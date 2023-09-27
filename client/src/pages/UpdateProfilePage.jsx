@@ -25,7 +25,8 @@ const UpdateProfilePage = () => {
   const dispatch = useDispatch();
   const toast = useCustomToast();
   const [loading, setLoading] = useState();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
   useEffect(() => {
     setImgUrl(user.profilePic);
   }, [user]);
@@ -41,7 +42,7 @@ const UpdateProfilePage = () => {
       await dispatch(updateProfile({ user, inputs, imgUrl })).unwrap();
       setLoading(false);
       toast("", "Profile Updated!", "success");
-      // navigate(`/${user.username}`);
+      navigate(`/${user.username}`);
     } catch (error) {
       setLoading(false);
       toast("", error, "error");
@@ -146,6 +147,7 @@ const UpdateProfilePage = () => {
             _hover={{
               bg: "red.500",
             }}
+            onClick={() => navigate(`/${user.username}`)}
           >
             Cancel
           </Button>

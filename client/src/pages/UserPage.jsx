@@ -8,6 +8,8 @@ import { getUserPosts } from "../requests/postRequests";
 import Post from "../components/Post";
 import { useDispatch, useSelector } from "react-redux";
 import CreatePost from "../components/CreatePost";
+import { removePosts } from "../reducers/postSlice";
+import { getUserProfile } from "../requests/userRequests";
 
 const UserPage = () => {
   const [user, setUser] = useState(null);
@@ -15,21 +17,17 @@ const UserPage = () => {
   const currentUser = useSelector((state) => state.user);
   const { username } = useParams();
   const toast = useCustomToast();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [fetchingPosts, setFetchingPosts] = useState(false);
   const dispatch = useDispatch();
 
   const getUser = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://threads-clone-hd.onrender.com/api/users/profile/${username}`
-      );
-      setLoading(false);
-      setUser(data);
-    } catch (error) {
-      setLoading(false);
-      toast("Error", error.response.data.message, "error");
-    }
+    setLoading(true);
+    dispatch(removePosts());
+    setLoading(false);
+    const data = await getUserProfile(username);
+    setUser(data);
+    setLoading(false);
   };
 
   const getPosts = async () => {

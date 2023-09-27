@@ -8,7 +8,7 @@ const LogoutButton = () => {
   const dispatch = useDispatch();
   const toast = useCustomToast();
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout()); 
   };
 
   return (

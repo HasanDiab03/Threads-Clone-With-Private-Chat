@@ -173,5 +173,8 @@ export const getSearchedUsers = async (req, res) => {
       $or: [{ name: username }, { username }],
     }).limit(5);
     return res.status(200).json(users);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log("Error in getting searched users", error.message);
+  }
 };

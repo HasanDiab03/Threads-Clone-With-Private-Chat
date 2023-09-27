@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/styled-system";
 import { store } from "./store.jsx";
 import { Provider } from "react-redux";
+import { SocketContextProvider } from "./context/SocketContext.jsx";
 const styles = {
   global: (props) => ({
     body: {
@@ -81,13 +82,15 @@ const theme = extendTheme({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <ChakraProvider theme={theme}>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+  <BrowserRouter>
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <SocketContextProvider>
           <App />
-        </ChakraProvider>
-      </Provider>
-    </BrowserRouter>
+        </SocketContextProvider>
+      </ChakraProvider>
+    </Provider>
+  </BrowserRouter>
   // </React.StrictMode>
 );

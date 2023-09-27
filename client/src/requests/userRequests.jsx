@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const url = "https://threads-clone-hd.onrender.com/api/users";
+const url = "/api/users";
 const token = JSON.parse(localStorage.getItem("token"));
 
 const config = {
@@ -75,6 +75,15 @@ export const getSearchedUsers = async (search, toast) => {
     const { data } = await axios.get(`${url}/search?search=${search}`);
     return data;
   } catch (error) {
-    toast("Error", error.response.data.message);
+    toast("Error", error.response.data.message, "error");
+  }
+};
+
+export const getUserProfile = async (username, toast) => {
+  try {
+    const { data } = await axios.get(`${url}/profile/${username}`);
+    return data;
+  } catch (error) {
+    toast("Error", error.response.data.message, "error");
   }
 };

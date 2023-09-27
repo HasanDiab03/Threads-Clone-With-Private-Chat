@@ -28,6 +28,8 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import useCustomToast from "../hooks/useCustomToast";
 import { getSearchedUsers } from "../requests/userRequests";
+import { removePosts } from "../reducers/postSlice";
+import {BsFillChatQuoteFill} from "react-icons/bs";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +40,8 @@ const Header = () => {
   const [searching, setSearching] = useState(false);
   const toast = useCustomToast();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+ 
   const handleSearch = async () => {
     if (!search) {
       toast("Error", "Please provide search input", "error");
@@ -64,7 +67,7 @@ const Header = () => {
       {user ? (
         <Flex justifyContent={"space-between"} mt={6} mb={12}>
           <Flex alignItems={"center"} gap={4}>
-            <Link as={RouterLink} to={"/"}>
+            <Link as={RouterLink} to={"/"} onClick={() => dispatch(removePosts())}>
               <AiFillHome size={24} />
             </Link>
             <SearchIcon cursor={"pointer"} onClick={onOpen} />
@@ -80,6 +83,9 @@ const Header = () => {
           <Flex alignItems={"center"} gap={4}>
             <Link as={RouterLink} to={`/${user.username}`}>
               <RxAvatar size={24} />
+            </Link>
+            <Link as={RouterLink} to={`/chat`}>
+              <BsFillChatQuoteFill size={20} />
             </Link>
             <LogoutButton />
           </Flex>

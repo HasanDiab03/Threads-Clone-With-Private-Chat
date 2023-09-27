@@ -13,7 +13,11 @@ const initialState = { posts: [], post: null };
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    removePosts: (state) => {
+      return { ...state, posts: [] };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createPost.fulfilled, (state, action) => {
@@ -54,5 +58,7 @@ const postSlice = createSlice({
       });
   },
 });
+
+export const { removePosts } = postSlice.actions;
 
 export default postSlice.reducer;
